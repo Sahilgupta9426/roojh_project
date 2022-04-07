@@ -91,9 +91,7 @@ class _SignInState extends State<SignIn> {
                   Expanded(
                       child: Divider(
                     thickness: 1,
-                    // indent: 37,
                     endIndent: 37,
-
                     color: Colors.black,
                   )),
                 ]),
