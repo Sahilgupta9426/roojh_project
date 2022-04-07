@@ -60,13 +60,15 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.only(left: 24.0, right: 26.64),
                       child: TextFormField(
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600),
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: HexColor('#F3F6FF'),
                           border: InputBorder.none,
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          hintText: "Username",
+                          hintText: "Enter Your Username",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(98.67),
                             borderSide: BorderSide(
@@ -98,14 +100,18 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.only(left: 24.0, right: 26.64),
                       child: TextFormField(
-                        // style: style,
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600),
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: HexColor('#F3F6FF'),
                           border: InputBorder.none,
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          hintText: "Password",
+                          hintText: "Enter Your Password",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(98.67),
                             borderSide: BorderSide(
@@ -134,7 +140,9 @@ class _SignInState extends State<SignIn> {
                               child: Text(
                                 'Forget Password?',
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
                               ))
                         ],
                       ),
@@ -168,12 +176,9 @@ class _SignInState extends State<SignIn> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('New here',
+                      Text('New here?',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w600)),
-                      SizedBox(
-                        width: 5,
-                      ),
                       TextButton(
                         onPressed: () {},
                         child: Text('Create Account',
@@ -198,7 +203,9 @@ class _SignInState extends State<SignIn> {
                   ),
                   Text(
                     "Or Login With",
-                    style: TextStyle(fontWeight: FontWeight.w100),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                   SizedBox(
                     width: 10,
