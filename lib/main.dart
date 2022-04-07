@@ -29,6 +29,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
+            padding: const EdgeInsets.all(0),
             color: Colors.white,
             child: ListView(
               children: [
@@ -210,13 +211,14 @@ class TopImagesField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.zero,
       width: MediaQuery.of(context).size.width,
-      height: 250,
+      height: 275,
       child: Stack(
         children: [
           new SvgPicture.asset(
             'svg_png/background.svg',
-            width: MediaQuery.of(context).size.width,
+            // width: MediaQuery.of(context).size.width,
           ),
           new Positioned(
             left: 27,
@@ -228,7 +230,7 @@ class TopImagesField extends StatelessWidget {
             ),
           ),
           new Positioned(
-              top: 80,
+              top: 88,
               left: 126,
               child: new Image.asset(
                 'svg_png/Frame.png',
@@ -369,66 +371,5 @@ class LoginField extends StatelessWidget {
         )
       ],
     ));
-  }
-}
-
-class StackExample extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Container(
-        padding: const EdgeInsets.all(8.0),
-        height: 500.0,
-        width: 500.0,
-        alignment: FractionalOffset.center,
-        child: new Stack(
-          //alignment:new Alignment(x, y)
-          children: <Widget>[
-            new Icon(Icons.monetization_on,
-                size: 36.0, color: const Color.fromRGBO(218, 165, 32, 1.0)),
-            new Positioned(
-              bottom: 20.0,
-              child: new Icon(Icons.monetization_on,
-                  size: 36.0, color: const Color.fromRGBO(218, 165, 32, 1.0)),
-            ),
-            new Positioned(
-              bottom: 40.0,
-              child: new Icon(Icons.monetization_on,
-                  size: 36.0, color: const Color.fromRGBO(218, 165, 32, 1.0)),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TopImages extends StatelessWidget {
-  const TopImages({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 300,
-        child: Stack(
-          children: [
-            new SvgPicture.asset(
-              'svg_png/background.svg',
-              width: MediaQuery.of(context).size.width,
-            ),
-            new Positioned(
-                top: 100,
-                left: 126,
-                child: new Image.asset(
-                  'svg_png/Frame.png',
-                  height: 163,
-                  width: 145,
-                )),
-          ],
-        ),
-      ),
-    );
   }
 }
