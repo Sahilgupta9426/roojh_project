@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class LoginField extends StatelessWidget {
-  const LoginField({
+class SignupField extends StatelessWidget {
+  const SignupField({
     Key? key,
   }) : super(key: key);
 
@@ -90,22 +90,44 @@ class LoginField extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 14.49),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 24, bottom: 2),
+            child: Text(
+              'Confirm password',
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            ),
+          ),
+        ),
         Padding(
-          padding: const EdgeInsets.only(top: 15.85, right: 30),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(
-                  style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                  onPressed: () {},
-                  child: Text(
-                    'Forget Password?',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
-                  ))
-            ],
+          padding: const EdgeInsets.only(left: 24.0, right: 26.64),
+          child: TextFormField(
+            obscureText: true,
+            enableSuggestions: false,
+            autocorrect: false,
+            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: HexColor('#F3F6FF'),
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              hintText: "Please confirm your password",
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(98.67),
+                borderSide: BorderSide(
+                  color: HexColor('#CED3E1'),
+                  width: 1.0,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(98.67),
+                  borderSide: BorderSide(
+                    color: HexColor('#CED3E1'),
+                    width: 1.0,
+                  )),
+            ),
           ),
         ),
         SizedBox(height: 20.64),
@@ -117,7 +139,7 @@ class LoginField extends StatelessWidget {
             // child: RaisedButton(
             //   color: HexColor('#F46524'),
             //   child: const Text(
-            //     'Sign In',
+            //     'Sign up',
             //     style: TextStyle(fontSize: 20, color: Colors.white),
             //   ),
             //   onPressed: () {},
@@ -127,7 +149,7 @@ class LoginField extends StatelessWidget {
             // ),
             child: ElevatedButton(
               onPressed: () {},
-              child: Text('Sign in',
+              child: Text('Sign up',
                   style: TextStyle(fontSize: 20, color: Colors.white)),
               style: ButtonStyle(
                   foregroundColor:

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class Create_Acoount extends StatelessWidget {
-  const Create_Acoount({
+class AlreadyHaveAccount extends StatelessWidget {
+  const AlreadyHaveAccount({
     Key? key,
   }) : super(key: key);
 
@@ -13,13 +13,13 @@ class Create_Acoount extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('New here?',
+          Text('Already have an account?',
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/signup");
+              Navigator.pushNamed(context, "/login");
             },
-            child: Text('Create Account',
+            child: Text('Sign In',
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
