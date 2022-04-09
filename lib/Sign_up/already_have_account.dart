@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+//redirect to sign in page
 class AlreadyHaveAccount extends StatelessWidget {
   const AlreadyHaveAccount({
     Key? key,

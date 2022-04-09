@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+//sign up form
 class SignupField extends StatelessWidget {
   const SignupField({
     Key? key,
