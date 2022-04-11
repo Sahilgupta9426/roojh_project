@@ -1,8 +1,6 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:roojh/Sign_up/main_sign_up.dart';
-
 import 'Login_page/main_login.dart';
 
 void main() {
