@@ -39,6 +39,7 @@ dependencies:
   fluttertoast: ^8.0.9
   shared_preferences: ^2.0.13
   local_auth: ^1.1.11
+  is_lock_screen: ^2.0.0
 
 dev_dependencies:
   flutter_test:

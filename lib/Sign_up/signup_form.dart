@@ -43,11 +43,19 @@ class SignupField extends StatelessWidget {
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(98.67),
-                  borderSide: BorderSide(
-                    color: HexColor('#CED3E1'),
-                    width: 1.0,
-                  )),
+                borderRadius: BorderRadius.circular(98.67),
+                borderSide: BorderSide(
+                  color: HexColor('#CED3E1'),
+                  width: 1.0,
+                ),
+              ),
+              errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(98.67),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(98.67),
+              ),
             ),
           ),
         ),
@@ -88,6 +96,13 @@ class SignupField extends StatelessWidget {
                     color: HexColor('#CED3E1'),
                     width: 1.0,
                   )),
+              errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(98.67),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(98.67),
+              ),
             ),
           ),
         ),
@@ -128,6 +143,13 @@ class SignupField extends StatelessWidget {
                     color: HexColor('#CED3E1'),
                     width: 1.0,
                   )),
+              errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(98.67),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(98.67),
+              ),
             ),
           ),
         ),
