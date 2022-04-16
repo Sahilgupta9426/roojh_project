@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:is_lock_screen/is_lock_screen.dart';
 
-import 'package:roojh/Sign_up/main_sign_up.dart';
-import 'package:roojh/api/local_auth_api.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:roojh/controller/auth_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //login form
 class LoginField extends StatefulWidget {
@@ -25,60 +24,10 @@ class _LoginFieldState extends State<LoginField> {
     var password = "";
     final usernameController = TextEditingController();
     final passwordController = TextEditingController();
-    ////authentication part
-    // final LocalAuthentication auth = LocalAuthentication();
-
-    // String _authorized = 'Not Authorized';
-    // bool _isAuthenticating = false;
-
-    // var _channel;
-
-    // Future<void> _authenticate() async {
-    //   bool authenticated = false;
-    //   try {
-    //     setState(() {
-    //       _isAuthenticating = true;
-    //       _authorized = 'Authenticating';
-    //     });
-    //     authenticated = await auth.authenticate(
-    //         localizedReason: 'Let OS determine authentication method',
-    //         useErrorDialogs: true,
-    //         stickyAuth: true);
-    //     setState(() {
-    //       _isAuthenticating = false;
-    //       if (authenticated) {
-    //         Navigator.pushNamed(context, "/signup");
-    //       }
-    //     });
-    //   } on PlatformException catch (e) {
-    //     print(e);
-    //     setState(() {
-    //       _isAuthenticating = false;
-    //       _authorized = "Error - ${e.message}";
-    //     });
-    //     return;
-    //   }
-    //   if (!mounted) return;
-
-    //   setState(
-    //       () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
-    // }
-
-    // // void _cancelAuthentication() async {
-    // //   await auth.stopAuthentication();
-    // //   setState(() => _isAuthenticating = false);
-    // // }
-
-    // Future<bool> isDeviceSupported() async {
-    //   return (await _channel.invokeMethod<bool>('isDeviceSupported')) ?? false;
-    // }
-
-    // Future<bool> canCheckBiometrics() async =>
-    //     (await _channel.invokeListMethod<String>('getAvailableBiometrics'))!
-    //         .isNotEmpty;
-    //         //   Future<void> _getAvailableBiometrics() async {
-
-    // //end authentication
+    Map<String, String> _loginUserData = {
+      'username': '',
+      'password': '',
+    };
 
 //2nd part
     LocalAuthentication auth = LocalAuthentication();
@@ -196,40 +145,44 @@ class _LoginFieldState extends State<LoginField> {
             Padding(
               padding: const EdgeInsets.only(left: 24.0, right: 26.64),
               child: TextFormField(
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: HexColor('#F3F6FF'),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    hintText: "Enter Your Username",
-                    enabledBorder: OutlineInputBorder(
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: HexColor('#F3F6FF'),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: "Enter Your Username",
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(98.67),
+                    borderSide: BorderSide(
+                      color: HexColor('#CED3E1'),
+                      // width: 2.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(98.67),
                       borderSide: BorderSide(
                         color: HexColor('#CED3E1'),
-                        // width: 2.0,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(98.67),
-                        borderSide: BorderSide(
-                          color: HexColor('#CED3E1'),
-                          width: 1.0,
-                        )),
-                    errorStyle: TextStyle(color: Colors.red, fontSize: 15),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(98.67),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(98.67),
-                    ),
+                        width: 1.0,
+                      )),
+                  errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(98.67),
                   ),
-                  controller: usernameController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'please enter name';
-                    }
-                  }),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(98.67),
+                  ),
+                ),
+                controller: usernameController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter name';
+                  }
+                },
+                onSaved: (value) {
+                  _loginUserData['username'] = value!;
+                },
+              ),
             ),
             SizedBox(height: 14.49),
             Align(
@@ -281,6 +234,9 @@ class _LoginFieldState extends State<LoginField> {
                     if (value!.isEmpty) {
                       return 'please enter password';
                     }
+                  },
+                  onSaved: (value) {
+                    _loginUserData['password'] = value!;
                   }),
             ),
             Padding(
@@ -308,25 +264,22 @@ class _LoginFieldState extends State<LoginField> {
               child: Container(
                 height: 51.8,
                 width: MediaQuery.of(context).size.width,
-                // child: RaisedButton(
-                //   color: HexColor('#F46524'),
-                //   child: const Text(
-                //     'Sign In',
-                //     style: TextStyle(fontSize: 20, color: Colors.white),
-                //   ),
-                //   onPressed: () {},
-                //   shape: new RoundedRectangleBorder(
-                //     borderRadius: new BorderRadius.circular(25.9),
-                //   ),
-                // ),
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       setState(() {
                         username = usernameController.text;
                         password = passwordController.text;
+                        // final SharedPreferences sharedPreferences =
+                        //     await SharedPreferences.getInstance();
+                        // sharedPreferences.setString(
+                        //     'username', usernameController.text);
+                        // Navigator.pushNamed(context, "/home");
+                        // _authenticate();
                       });
-                      _authenticate();
+                      _formKey.currentState!.save();
+                      print(_loginUserData);
+                      AuthController.login(_loginUserData);
                     }
                   },
                   child: Text('Sign in',
