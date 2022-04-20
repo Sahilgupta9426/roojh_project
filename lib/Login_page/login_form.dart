@@ -4,7 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:roojh/controller/auth_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 //login form
 class LoginField extends StatefulWidget {
@@ -29,101 +29,82 @@ class _LoginFieldState extends State<LoginField> {
       'password': '',
     };
 
-//2nd part
-    LocalAuthentication auth = LocalAuthentication();
-    bool? _canCheckBiometric;
-    List<BiometricType>? _availableBiometric;
-    String authorized = "Not authorized";
+// //2nd part
+//     LocalAuthentication auth = LocalAuthentication();
+//     bool? _canCheckBiometric;
+//     List<BiometricType>? _availableBiometric;
+//     String authorized = "Not authorized";
 
-    //checking bimetrics
-    //this function will check the sensors and will tell us
-    // if we can use them or not
-    Future<void> _checkBiometric() async {
-      bool? canCheckBiometric;
-      try {
-        canCheckBiometric = await auth.canCheckBiometrics;
-      } on PlatformException catch (e) {
-        print(e);
-      }
-      if (!mounted) return;
+//     //checking bimetrics
+//     //this function will check the sensors and will tell us
+//     // if we can use them or not
+//     Future<void> _checkBiometric() async {
+//       bool? canCheckBiometric;
+//       try {
+//         canCheckBiometric = await auth.canCheckBiometrics;
+//       } on PlatformException catch (e) {
+//         print(e);
+//       }
+//       if (!mounted) return;
 
-      setState(() {
-        _canCheckBiometric = canCheckBiometric;
-      });
-    }
+//       setState(() {
+//         _canCheckBiometric = canCheckBiometric;
+//       });
+//     }
 
-    //this function will get all the available biometrics inside our device
-    //it will return a list of objects, but for our example it will only
-    //return the fingerprint biometric
-    Future<void> _getAvailableBiometrics() async {
-      List<BiometricType>? availableBiometric;
-      try {
-        availableBiometric = await auth.getAvailableBiometrics();
-      } on PlatformException catch (e) {
-        print(e);
-      }
-      if (!mounted) return;
+//     //this function will get all the available biometrics inside our device
+//     //it will return a list of objects, but for our example it will only
+//     //return the fingerprint biometric
+//     Future<void> _getAvailableBiometrics() async {
+//       List<BiometricType>? availableBiometric;
+//       try {
+//         availableBiometric = await auth.getAvailableBiometrics();
+//       } on PlatformException catch (e) {
+//         print(e);
+//       }
+//       if (!mounted) return;
 
-      setState(() {
-        _availableBiometric = availableBiometric;
-      });
-    }
+//       setState(() {
+//         _availableBiometric = availableBiometric;
+//       });
+//     }
 
-    //this function will open an authentication dialog
-    // and it will check if we are authenticated or not
-    // so we will add the major action here like moving to another activity
-    // or just display a text that will tell us that we are authenticated
-    Future<void> _authenticate() async {
-      bool authenticated = false;
-      try {
-        // ignore: deprecated_member_use
-        authenticated = await auth.authenticateWithBiometrics(
-            localizedReason: "Scan your finger print to authenticate",
-            useErrorDialogs: true,
-            stickyAuth: false);
-        if (authenticated) {
-          Navigator.pushNamed(context, "/signup");
-        }
-      } on PlatformException catch (e) {
-        print(e);
-      }
-      if (!mounted) return;
+//     //this function will open an authentication dialog
+//     // and it will check if we are authenticated or not
+//     // so we will add the major action here like moving to another activity
+//     // or just display a text that will tell us that we are authenticated
+//     Future<void> _authenticate() async {
+//       bool authenticated = false;
+//       try {
+//         // ignore: deprecated_member_use
+//         authenticated = await auth.authenticateWithBiometrics(
+//             localizedReason: "Scan your finger print to authenticate",
+//             useErrorDialogs: true,
+//             stickyAuth: false);
+//         if (authenticated) {
+//           Navigator.pushNamed(context, "/signup");
+//         }
+//       } on PlatformException catch (e) {
+//         print(e);
+//       }
+//       if (!mounted) return;
 
-      setState(() {
-        authorized =
-            authenticated ? "Autherized success" : "Failed to authenticate";
-      });
-    }
+//       setState(() {
+//         authorized =
+//             authenticated ? "Autherized success" : "Failed to authenticate";
+//       });
+//     }
 
-    void checkAvailableResult() async {
-      bool canCheckBiometrics = await auth.canCheckBiometrics;
+//     void checkAvailableResult() async {
+//       bool canCheckBiometrics = await auth.canCheckBiometrics;
 
-      if (canCheckBiometrics) {
-        var availableOptions = await auth.getAvailableBiometrics();
-      } else {
-        var message = "Unable to check biometric";
-      }
-      setState(() {});
-    }
-
-    // supported_device() {
-    //   auth.isDeviceSupported().then((value) {
-    //     if (value) {
-    //       checkAvailableResult();
-    //     } else {
-    //       setState(() {
-    //         var message = "Not supported or added in device";
-    //       });
-    //     }
-    //   });
-    // }
-    // @override
-    // void initState() {
-    //   // TODO: implement initState
-    //   _checkBiometric();
-    //   _getAvailableBiometrics();
-    // }
-//2nd part
+//       if (canCheckBiometrics) {
+//         var availableOptions = await auth.getAvailableBiometrics();
+//       } else {
+//         var message = "Unable to check biometric";
+//       }
+//       setState(() {});
+//     }
 
     return Form(
         key: _formKey,
@@ -274,12 +255,13 @@ class _LoginFieldState extends State<LoginField> {
                         //     await SharedPreferences.getInstance();
                         // sharedPreferences.setString(
                         //     'username', usernameController.text);
-                        // Navigator.pushNamed(context, "/home");
+                        // Navigator.pushNamed(context, "/auth");
                         // _authenticate();
                       });
                       _formKey.currentState!.save();
-                      print(_loginUserData);
-                      AuthController.login(_loginUserData);
+                      // print(_loginUserData);
+                      // AuthController.login(_loginUserData);
+                      Navigator.pushNamed(context, "/auth");
                     }
                   },
                   child: Text('Sign in',
@@ -302,6 +284,26 @@ class _LoginFieldState extends State<LoginField> {
         ));
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // class AuthApp extends StatefulWidget {
 //   @override

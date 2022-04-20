@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roojh/Sign_up/main_sign_up.dart';
+import 'package:roojh/homepage/createpin.dart';
 import 'package:roojh/homepage/home.dart';
-import 'package:roojh/root/root.dart';
+// import 'package:roojh/root/root.dart';
 import 'Login_page/main_login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 import 'controller/auth_controller.dart';
+import 'homepage/bio_authpage.dart';
 
 void main() {
   // SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -30,22 +32,22 @@ class _StartPointState extends State<StartPoint> {
     final authController = AuthController();
     return GetMaterialApp(
         title: 'Roojh',
-        // home: user == null ? SignIn() : Home(),
-        home: FutureBuilder(
-            future: authController.tryAutoLogin(),
-            builder: (contect, authResult) {
-              if (authResult.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
-                );
-              } else {
-                if (authResult.data == true) {
-                  return Home();
-                }
-                return SignIn();
-              }
-            }),
+        home: SignIn(),
+        // home: FutureBuilder(
+        //     future: authController.tryAutoLogin(),
+        //     builder: (contect, authResult) {
+        //       if (authResult.connectionState == ConnectionState.waiting) {
+        //         return Center(
+        //           child: CircularProgressIndicator(
+        //               valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
+        //         );
+        //       } else {
+        //         if (authResult.data == true) {
+        //           return Home();
+        //         }
+        //         return SignIn();
+        //       }
+        //     }),
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
             scaffoldBackgroundColor: Color.fromARGB(255, 255, 249, 249)),
@@ -53,6 +55,8 @@ class _StartPointState extends State<StartPoint> {
           "/login": (context) => SignIn(),
           "/signup": (context) => SignUp(),
           "/home": (context) => Home(),
+          "/auth": (context) => AuthPage(),
+          "/createpin": (context) => CreatePin(),
         });
   }
 }

@@ -1,10 +1,14 @@
 import 'dart:async';
+
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controller/auth_controller.dart';
+import '../local_storage/local_storage.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -32,6 +36,7 @@ class _HomeState extends State<Home> {
   //     finalusername = obtainedUsername!;
   //   });
   // }
+  //2nd part
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,7 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.all(32.0),
         child: Column(
           children: [
-            Text('hello $finalusername'),
+            Text('hello '),
             ElevatedButton(
                 // onPressed: () async {
                 //   final SharedPreferences sharedPreferences =
