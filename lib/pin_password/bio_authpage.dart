@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
+
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/services.dart';
+// import 'package:roojh/homepage/createpin.dart';
 import 'package:roojh/local_storage/local_storage.dart';
+import 'package:roojh/pin_password/createpin.dart';
+
+import '../common_code/topImg.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -33,13 +38,13 @@ class _AuthPageState extends State<AuthPage> {
           useErrorDialogs: true,
           stickyAuth: true);
       if (authenticated) {
-        await Navigator.pushNamed(context, "/home");
+        await Navigator.pushReplacementNamed(context, '/home');
       }
       setState(() {
         _isAuthenticating = false;
       });
     } on PlatformException catch (e) {
-      print(e);
+      // print(e);
       setState(() {
         _isAuthenticating = false;
         _authorized = "Error - ${e.message}";
@@ -58,7 +63,7 @@ class _AuthPageState extends State<AuthPage> {
   }
 
 //check auth is available or not start
-  static Future<bool> authenticateWithBiometrics() async {
+  Future<bool> authenticateWithBiometrics() async {
     final LocalAuthentication localAuthentication = LocalAuthentication();
     bool isBiometricSupported = await localAuthentication.isDeviceSupported();
     bool canCheckBiometrics = await localAuthentication.canCheckBiometrics;
@@ -75,9 +80,40 @@ class _AuthPageState extends State<AuthPage> {
     return isAuthenticated;
   }
 
+  // local storage
+  final LocalStorage secureStorage = LocalStorage();
+  // local storage end
+  // var getpin1 = '';
+
+  void initState() {
+    super.initState();
+
+    _authenticate();
+    // secureStorage.readSecureData('pin1').then((value) => getpin1 = value);
+  }
 //check auth is available or not end
 
-//form
+  @override
+  Widget build(BuildContext context) {
+    var getpin1 = '';
+
+    secureStorage.readSecureData('pin1').then((value) => getpin1 = value);
+
+    return EnterPin();
+  }
+}
+
+class EnterPin extends StatefulWidget {
+  const EnterPin({Key? key}) : super(key: key);
+
+  @override
+  State<EnterPin> createState() => _EnterPinState();
+}
+
+class _EnterPinState extends State<EnterPin> {
+  final LocalAuthentication auth = LocalAuthentication();
+
+  //form
   final _formKey = GlobalKey<FormState>();
 
   var getpin = "";
@@ -90,8 +126,8 @@ class _AuthPageState extends State<AuthPage> {
 
   void initState() {
     super.initState();
+
     secureStorage.readSecureData('pin1').then((value) => getpin1 = value);
-    _authenticate();
   }
 
   @override
@@ -99,14 +135,18 @@ class _AuthPageState extends State<AuthPage> {
     return Scaffold(
       // backgroundColor: Colors.black,
       body: Container(
-          child: Padding(
-        padding: const EdgeInsets.all(120),
-        child: Column(
-          children: [
-            Align(
+          child: Column(
+        children: [
+          TopImagesField(),
+          SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30.0, right: 30),
+            child: Align(
               alignment: Alignment.center,
               child: Text(
-                '$_authorized ',
+                'Please Enter your Pin Password ',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
@@ -115,27 +155,51 @@ class _AuthPageState extends State<AuthPage> {
                 textDirection: TextDirection.ltr,
               ),
             ),
-            Form(
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 60.0, right: 60),
+            child: Form(
               key: _formKey,
               child: Column(
                 children: [
-                  TextFormField(
-                      controller: pinController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'please enter password valid password';
-                        }
-                      }),
-                  ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          getpin = pinController.text;
-                          if (getpin == getpin1) {
-                            Navigator.pushNamed(context, "/home");
+                  SizedBox(
+                    width: 100,
+                    child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: pinController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please enter password valid password';
                           }
-                        }
-                      },
-                      child: Text('submit')),
+                        }),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                HexColor('#F46524')),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.9),
+
+                              // side: BorderSide(color: Colors.red)
+                            ))),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            getpin = pinController.text;
+                            if (getpin == getpin1) {
+                              // Navigator.pushNamed(context, "/home");
+                              Navigator.pushReplacementNamed(context, '/home');
+                            }
+                          }
+                        },
+                        child: Text('submit')),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -154,9 +218,9 @@ class _AuthPageState extends State<AuthPage> {
                       ))
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       )),
     );
   }

@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:roojh/Login_page/main_login.dart';
 import 'package:roojh/homepage/home.dart';
+import 'package:roojh/pin_password/bio_authpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../homepage/bio_authpage.dart';
+// import '../homepage/bio_authpage.dart';
 
 class AuthController {
   static login(Map userData) async {

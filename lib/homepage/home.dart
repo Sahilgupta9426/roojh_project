@@ -1,14 +1,8 @@
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:local_auth/local_auth.dart';
 
 // import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controller/auth_controller.dart';
-import '../local_storage/local_storage.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -57,7 +51,8 @@ class _HomeState extends State<Home> {
                 //   Navigator.pushNamed(context, "/login");
                 // },
                 onPressed: () {
-                  AuthController.logOut();
+                  // AuthController.logOut();
+                  Navigator.pushReplacementNamed(context, "/login");
                 },
                 child: Text('logout'))
           ],

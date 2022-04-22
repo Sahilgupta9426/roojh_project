@@ -172,7 +172,7 @@ class SignupField extends StatelessWidget {
             // ),
             child: ElevatedButton(
               onPressed: () {},
-              child: Text('Sign up',
+              child: Text('Continue',
                   style: TextStyle(fontSize: 20, color: Colors.white)),
               style: ButtonStyle(
                   foregroundColor:

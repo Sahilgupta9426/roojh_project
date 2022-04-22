@@ -3,14 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roojh/Sign_up/main_sign_up.dart';
-import 'package:roojh/homepage/createpin.dart';
+// import 'package:roojh/homepage/createpin.dart';
 import 'package:roojh/homepage/home.dart';
+import 'package:roojh/pin_password/bio_authpage.dart';
+import 'package:roojh/pin_password/createpin.dart';
 // import 'package:roojh/root/root.dart';
 import 'Login_page/main_login.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 import 'controller/auth_controller.dart';
-import 'homepage/bio_authpage.dart';
+// import 'homepage/bio_authpage.dart';
 
 void main() {
   // SharedPreferences preferences = await SharedPreferences.getInstance();
