@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../Sign_up/main_sign_up.dart';
+
 //text button which redirect in 'sign up page'
 class Create_Acoount extends StatelessWidget {
   const Create_Acoount({
@@ -18,7 +20,24 @@ class Create_Acoount extends StatelessWidget {
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/signup");
+              // Navigator.pushNamed(context, "/signup");
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(seconds: 1),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const SignUp(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, Widget child) {
+                      animation = CurvedAnimation(
+                          parent: animation, curve: Curves.easeInSine);
+                      return ScaleTransition(
+                        scale: animation,
+                        alignment: Alignment.center,
+                        child: child,
+                      );
+                    },
+                  ));
             },
             child: Text('Create Account',
                 style: TextStyle(

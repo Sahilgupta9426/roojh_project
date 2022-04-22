@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:roojh/Sign_up/main_sign_up.dart';
 import 'package:roojh/controller/auth_controller.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
