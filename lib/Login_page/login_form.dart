@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:roojh/Sign_up/main_sign_up.dart';
 import 'package:roojh/controller/auth_controller.dart';
+import 'package:roojh/forget_password/main_forgetpassword.dart';
+// import 'package:roojh/forget_password/main_forgetpassword.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 //login form
@@ -230,7 +232,28 @@ class _LoginFieldState extends State<LoginField> {
                   TextButton(
                       style: TextButton.styleFrom(
                           padding: const EdgeInsets.all(0)),
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigator.pushNamed(context, "/forgetPass");
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              // transitionDuration: Duration(seconds: 1),
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      const ForgetPassword(),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, Widget child) {
+                                animation = CurvedAnimation(
+                                    parent: animation,
+                                    curve: Curves.easeInSine);
+                                return ScaleTransition(
+                                  scale: animation,
+                                  alignment: Alignment.center,
+                                  child: child,
+                                );
+                              },
+                            ));
+                      },
                       child: Text(
                         'Forget Password?',
                         style: TextStyle(

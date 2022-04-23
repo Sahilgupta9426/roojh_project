@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roojh/Sign_up/main_sign_up.dart';
+// import 'package:roojh/forget_password/main_forgetpassword.dart';
 // import 'package:roojh/homepage/createpin.dart';
 import 'package:roojh/homepage/home.dart';
 import 'package:roojh/pin_password/bio_authpage.dart';
@@ -12,6 +13,7 @@ import 'Login_page/main_login.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 import 'controller/auth_controller.dart';
+import 'forget_password/main_forgetpassword.dart';
 // import 'homepage/bio_authpage.dart';
 
 void main() {
@@ -55,6 +57,7 @@ class _StartPointState extends State<StartPoint> {
             scaffoldBackgroundColor: Color.fromARGB(255, 255, 249, 249)),
         routes: {
           "/login": (context) => SignIn(),
+          "/forgetPass": (context) => ForgetPassword(),
           "/signup": (context) => SignUp(),
           "/home": (context) => Home(),
           "/auth": (context) => AuthPage(),
