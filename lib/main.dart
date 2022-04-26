@@ -1,18 +1,14 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:roojh/Sign_up/main_sign_up.dart';
-// import 'package:roojh/forget_password/main_forgetpassword.dart';
-// import 'package:roojh/homepage/createpin.dart';
+
 import 'package:roojh/homepage/home.dart';
 import 'package:roojh/pin_password/bio_authpage.dart';
 import 'package:roojh/pin_password/createpin.dart';
-// import 'package:roojh/root/root.dart';
-import 'Login_page/main_login.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
-import 'controller/auth_controller.dart';
+import 'Login_page/main_login.dart';
 import 'forget_password/main_forgetpassword.dart';
 // import 'homepage/bio_authpage.dart';
 
@@ -33,25 +29,9 @@ class StartPoint extends StatefulWidget {
 class _StartPointState extends State<StartPoint> {
   @override
   Widget build(BuildContext context) {
-    final authController = AuthController();
-    return GetMaterialApp(
+    return MaterialApp(
         title: 'Roojh',
         home: SignIn(),
-        // home: FutureBuilder(
-        //     future: authController.tryAutoLogin(),
-        //     builder: (contect, authResult) {
-        //       if (authResult.connectionState == ConnectionState.waiting) {
-        //         return Center(
-        //           child: CircularProgressIndicator(
-        //               valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
-        //         );
-        //       } else {
-        //         if (authResult.data == true) {
-        //           return Home();
-        //         }
-        //         return SignIn();
-        //       }
-        //     }),
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
             scaffoldBackgroundColor: Color.fromARGB(255, 255, 249, 249)),

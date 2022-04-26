@@ -23,13 +23,13 @@ class AlreadyHaveAccount extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   PageRouteBuilder(
-                    transitionDuration: Duration(seconds: 1),
+                    transitionDuration: Duration(milliseconds: 500),
                     pageBuilder: (context, animation, secondaryAnimation) =>
                         const SignIn(),
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, Widget child) {
                       animation = CurvedAnimation(
-                          parent: animation, curve: Curves.easeInSine);
+                          parent: animation, curve: Curves.decelerate);
                       return ScaleTransition(
                         scale: animation,
                         alignment: Alignment.center,

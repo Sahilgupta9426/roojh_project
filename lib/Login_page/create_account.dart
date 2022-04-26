@@ -24,13 +24,13 @@ class Create_Acoount extends StatelessWidget {
               Navigator.push(
                   context,
                   PageRouteBuilder(
-                    transitionDuration: Duration(seconds: 1),
+                    transitionDuration: Duration(milliseconds: 500),
                     pageBuilder: (context, animation, secondaryAnimation) =>
                         const SignUp(),
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, Widget child) {
                       animation = CurvedAnimation(
-                          parent: animation, curve: Curves.easeInSine);
+                          parent: animation, curve: Curves.easeOutCubic);
                       return ScaleTransition(
                         scale: animation,
                         alignment: Alignment.center,

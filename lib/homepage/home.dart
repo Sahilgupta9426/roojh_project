@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 // import 'package:shared_preferences/shared_preferences.dart';
 
-import '../controller/auth_controller.dart';
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
