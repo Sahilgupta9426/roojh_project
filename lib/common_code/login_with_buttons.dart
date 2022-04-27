@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class Google_login extends StatelessWidget {
-  const Google_login({
+class GoogleLogin extends StatelessWidget {
+  const GoogleLogin({
     Key? key,
   }) : super(key: key);
 

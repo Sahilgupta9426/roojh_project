@@ -43,7 +43,10 @@ dependencies:
   get:
   localstorage: ^4.0.0+1
   flutter_secure_storage: ^5.0.2
-  flutter_screenutil: ^5.4.0+1
+  # flutter_screenutil: ^5.4.0+1
+  amplify_flutter: 
+  amplify_auth_cognito: 
+  amplify_core:
 
 dev_dependencies:
   flutter_test:

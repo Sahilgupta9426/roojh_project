@@ -20,7 +20,7 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.all(0),
             color: Colors.white,
             child: ListView(
-              children: [
+              children: const [
                 TopImagesField(), //top images which in saved in 'common_code/topImg.dart'
                 Padding(
                   padding: EdgeInsets.only(
@@ -42,7 +42,7 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(height: 16),
                 Facebook_Login(), //login with facebook.saved in'common_code/login_with_buttons.dart'
                 SizedBox(height: 6),
-                Google_login(), //login with google.saved in'common_code/login_with_buttons.dart'
+                GoogleLogin(), //login with google.saved in'common_code/login_with_buttons.dart'
                 SizedBox(
                   height: 38,
                 )

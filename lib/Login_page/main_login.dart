@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
                 SizedBox(height: 16),
                 Facebook_Login(), //login with facebook button saved in 'common_code/login_with_button.dart'
                 SizedBox(height: 6),
-                Google_login(), //login with google button saved in 'common code/login_with_button.dart'
+                GoogleLogin(), //login with google button saved in 'common code/login_with_button.dart'
                 SizedBox(
                   height: 38,
                 )

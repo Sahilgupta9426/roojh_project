@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:roojh/forget_password/main_forgetpassword.dart';
+
+import '../services/auth_services.dart';
 // import 'package:roojh/forget_password/main_forgetpassword.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
@@ -158,9 +160,6 @@ class _LoginFieldState extends State<LoginField> {
                     return 'please enter your email id';
                   }
                 },
-                onSaved: (value) {
-                  _loginUserData['username'] = value!;
-                },
               ),
             ),
             SizedBox(height: 14.49),
@@ -177,46 +176,44 @@ class _LoginFieldState extends State<LoginField> {
             Padding(
               padding: const EdgeInsets.only(left: 24.0, right: 26.64),
               child: TextFormField(
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: HexColor('#F3F6FF'),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    hintText: "Enter Your Password",
-                    enabledBorder: OutlineInputBorder(
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: HexColor('#F3F6FF'),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: "Enter Your Password",
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(98.67),
+                    borderSide: BorderSide(
+                      color: HexColor('#CED3E1'),
+                      width: 1.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(98.67),
                       borderSide: BorderSide(
                         color: HexColor('#CED3E1'),
                         width: 1.0,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(98.67),
-                        borderSide: BorderSide(
-                          color: HexColor('#CED3E1'),
-                          width: 1.0,
-                        )),
-                    errorStyle: TextStyle(color: Colors.red, fontSize: 15),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(98.67),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(98.67),
-                    ),
+                      )),
+                  errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(98.67),
                   ),
-                  controller: passwordController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'please enter password';
-                    }
-                  },
-                  onSaved: (value) {
-                    _loginUserData['password'] = value!;
-                  }),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(98.67),
+                  ),
+                ),
+                controller: passwordController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter password';
+                  }
+                },
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15.85, right: 30),
@@ -239,17 +236,8 @@ class _LoginFieldState extends State<LoginField> {
                       setState(() {
                         username = usernameController.text;
                         password = passwordController.text;
-                        // final SharedPreferences sharedPreferences =
-                        //     await SharedPreferences.getInstance();
-                        // sharedPreferences.setString(
-                        //     'username', usernameController.text);
-                        // Navigator.pushNamed(context, "/auth");
-                        // _authenticate();
+                        AuthServices().sigIn(username, password, context);
                       });
-                      _formKey.currentState!.save();
-                      // print(_loginUserData);
-                      // AuthController.login(_loginUserData);
-                      Navigator.pushNamed(context, "/auth");
                     }
                   },
                   child: Text('Sign in',

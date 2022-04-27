@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-roojh-dev-224700-authRole",
+      "UnauthRoleArn": "arn:aws:iam::323896945488:role/amplify-roojh-dev-224700-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::323896945488:role/amplify-roojh-dev-224700-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-roojh-dev-224700-deployment",
+      "UnauthRoleName": "amplify-roojh-dev-224700-unauthRole",
+      "StackName": "amplify-roojh-dev-224700",
+      "StackId": "arn:aws:cloudformation:ap-south-1:323896945488:stack/amplify-roojh-dev-224700/aff5f6d0-c584-11ec-8234-0af549243c60",
+      "AmplifyAppId": "d3vmjxml7enlbt"
+    },
+    "categories": {
+      "auth": {
+        "roojh0356ee55": {}
+      }
+    }
+  }
+}
