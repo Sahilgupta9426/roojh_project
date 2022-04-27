@@ -2,11 +2,10 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 
 import 'package:flutter/material.dart';
-import 'package:roojh/Login_page/main_login.dart';
+
 import 'package:roojh/pin_password/bio_authpage.dart';
 
 import '../Sign_up/cofirmation_code/confirmation_page.dart';
-import '../homepage/home.dart';
 
 class AuthServices {
   signUp(email, username, password, context) async {
@@ -66,4 +65,9 @@ class AuthServices {
 
     userSignedIn.setUserCurrentState(false);
   }
+
+  // userExist(context, username) async {
+  //   var res = await Amplify.Auth.getCurrentUser();
+  //   if(res.username==username)
+  // }
 }

@@ -15,13 +15,6 @@ class SignupField extends StatefulWidget {
 }
 
 class _SignupFieldState extends State<SignupField> {
-  bool validateStructure(String value) {
-    String pattern =
-        r'^(?=.*?[a-z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-    RegExp regExp = new RegExp(pattern);
-    return regExp.hasMatch(value);
-  }
-
   late String username, password, conformpass;
   final _formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
@@ -132,6 +125,11 @@ class _SignupFieldState extends State<SignupField> {
               ),
             ),
             controller: passwordController,
+            // validator: (val) {
+            //   if (val!.length < 6) {
+            //     return 'Please Enter more than 6 letters';
+            //   }
+            // },
             onChanged: (val) {
               setState(() {
                 password = val;
@@ -190,7 +188,11 @@ class _SignupFieldState extends State<SignupField> {
                 conformpass = val;
               });
             },
-            onSaved: (val) {},
+            // validator: (val) {
+            //   if (val!.isEmpty) {
+            //     return 'Please Enter more than 6 letters';
+            //   }
+            // },
           ),
         ),
         SizedBox(
@@ -211,6 +213,9 @@ class _SignupFieldState extends State<SignupField> {
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
               onPressed: () {
+                final pass1 = passwordController.text;
+                final confirmpass = confirm_passwordController.text;
+
                 if (passwordController.text ==
                     confirm_passwordController.text) {
                   Navigator.of(context).push(
