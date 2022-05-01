@@ -14,6 +14,9 @@ class ConfirmCode extends StatefulWidget {
 
 class _ConfirmCodeState extends State<ConfirmCode> {
   late String code;
+  var right_code;
+  final _formKey = GlobalKey<FormState>();
+  final codeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,29 +40,49 @@ class _ConfirmCodeState extends State<ConfirmCode> {
               // decoration: BoxDecoration(color: Colors.white, boxShadow: [
               //   BoxShadow(color: Colors.grey.withOpacity(0.7))
               // ]),
-              child: Column(children: [
-                TextFormField(
-                  decoration: InputDecoration(hintText: ''),
-                  onChanged: (val) {
-                    setState(() {
-                      code = val;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text('The otp has been sent to your Email Id'),
-                SizedBox(height: 30),
-                ElevatedButton(
-                    onPressed: () {
-                      AuthServices().cofirmUser(widget.username, code, context);
+              child: Form(
+                key: _formKey,
+                child: Column(children: [
+                  TextFormField(
+                    maxLength: 6,
+                    decoration: InputDecoration(
+                      hintText: '',
+                      errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+                    ),
+                    controller: codeController,
+                    onChanged: (val) {
+                      setState(() {
+                        code = val;
+                      });
                     },
-                    child: Text('Confirm')),
-                SizedBox(
-                  height: 10,
-                ),
-              ]),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                      child: right_code ==
+                              'Confirmation code entered is not correct.'
+                          ? Text(
+                              'Please Enter Valid OTP',
+                              style: TextStyle(color: Colors.red),
+                            )
+                          : Text('The otp has been sent to your Email Id')),
+                  SizedBox(height: 30),
+                  ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          setState(() async {
+                            right_code = await AuthServices()
+                                .cofirmUser(widget.username, code, context);
+                          });
+                        }
+                      },
+                      child: Text('Confirm')),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ]),
+              ),
             ),
           ),
         ],

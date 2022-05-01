@@ -1,10 +1,8 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-
 import 'package:flutter/material.dart';
 
 import 'package:roojh/pin_password/bio_authpage.dart';
-
 import '../Sign_up/cofirmation_code/confirmation_page.dart';
 
 class AuthServices {
@@ -24,6 +22,7 @@ class AuthServices {
               });
     } on AuthException catch (e) {
       print(e.message);
+      return e.message;
     }
   }
 
@@ -38,6 +37,7 @@ class AuthServices {
       }
     } on AuthException catch (e) {
       print(e.message);
+      return e.message;
     }
   }
 
@@ -55,6 +55,7 @@ class AuthServices {
 
       // userSignedIn.setUserCurrentState(res.isSignedIn);
     } on AuthException catch (e) {
+      print('hello----');
       print(e.message);
     }
   }
@@ -66,8 +67,12 @@ class AuthServices {
     userSignedIn.setUserCurrentState(false);
   }
 
-  // userExist(context, username) async {
-  //   var res = await Amplify.Auth.getCurrentUser();
-  //   if(res.username==username)
-  // }
+  Future userExist(username) async {
+    try {
+      SignInResult res =
+          await Amplify.Auth.signIn(username: username, password: '0000');
+    } on AuthException catch (e) {
+      return e.message;
+    }
+  }
 }

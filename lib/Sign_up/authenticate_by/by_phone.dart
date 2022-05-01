@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ByPhone extends StatefulWidget {
-  const ByPhone({Key? key}) : super(key: key);
+  var user;
 
+  var pass;
+
+  // const ByPhone({Key? key}) : super(key: key);
+  ByPhone({
+    required this.user,
+    required this.pass,
+  });
   @override
   State<ByPhone> createState() => _ByPhoneState();
 }

@@ -18,7 +18,7 @@ class ByEmail extends StatefulWidget {
 class _ByEmailState extends State<ByEmail> {
   final _formKey = GlobalKey<FormState>();
   var email = "";
-
+  var notify;
   final emailController = TextEditingController();
 
   @override
@@ -34,7 +34,7 @@ class _ByEmailState extends State<ByEmail> {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 2),
                 child: Text(
-                  'Email id',
+                  'Email id ',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -100,20 +100,13 @@ class _ByEmailState extends State<ByEmail> {
               child: ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    setState(() {
+                    setState(() async {
                       email = emailController.text;
 
-                      AuthServices().signUp(email, username, password, context);
-                      // final SharedPreferences sharedPreferences =
-                      //     await SharedPreferences.getInstance();
-                      // sharedPreferences.setString(
-                      //     'email', emailController.text);
-                      // Navigator.pushNamed(context, "/auth");
+                      notify = await AuthServices()
+                          .signUp(email, username, password, context);
                     });
                     _formKey.currentState!.save();
-                    // print(_loginUserData);
-                    // AuthController.login(_loginUserData);
-                    // Navigator.pushNamed(context, "/auth");
                   }
                 },
                 child: Text('Continue',

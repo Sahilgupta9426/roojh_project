@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:roojh/forget_password/main_forgetpassword.dart';
+import 'package:roojh/homepage/home.dart';
 
 import '../services/auth_services.dart';
 // import 'package:roojh/forget_password/main_forgetpassword.dart';
@@ -19,98 +20,18 @@ class LoginField extends StatefulWidget {
 class _LoginFieldState extends State<LoginField> {
   @override
   Widget build(BuildContext context) {
+    Color color = HexColor('#F46524');
     final _formKey = GlobalKey<FormState>();
     var username = "";
     var password = "";
     final usernameController = TextEditingController();
     final passwordController = TextEditingController();
-    Map<String, String> _loginUserData = {
-      'username': '',
-      'password': '',
-    };
-
-// //2nd part
-//     LocalAuthentication auth = LocalAuthentication();
-//     bool? _canCheckBiometric;
-//     List<BiometricType>? _availableBiometric;
-//     String authorized = "Not authorized";
-
-//     //checking bimetrics
-//     //this function will check the sensors and will tell us
-//     // if we can use them or not
-//     Future<void> _checkBiometric() async {
-//       bool? canCheckBiometric;
-//       try {
-//         canCheckBiometric = await auth.canCheckBiometrics;
-//       } on PlatformException catch (e) {
-//         print(e);
-//       }
-//       if (!mounted) return;
-
-//       setState(() {
-//         _canCheckBiometric = canCheckBiometric;
-//       });
-//     }
-
-//     //this function will get all the available biometrics inside our device
-//     //it will return a list of objects, but for our example it will only
-//     //return the fingerprint biometric
-//     Future<void> _getAvailableBiometrics() async {
-//       List<BiometricType>? availableBiometric;
-//       try {
-//         availableBiometric = await auth.getAvailableBiometrics();
-//       } on PlatformException catch (e) {
-//         print(e);
-//       }
-//       if (!mounted) return;
-
-//       setState(() {
-//         _availableBiometric = availableBiometric;
-//       });
-//     }
-
-//     //this function will open an authentication dialog
-//     // and it will check if we are authenticated or not
-//     // so we will add the major action here like moving to another activity
-//     // or just display a text that will tell us that we are authenticated
-//     Future<void> _authenticate() async {
-//       bool authenticated = false;
-//       try {
-//         // ignore: deprecated_member_use
-//         authenticated = await auth.authenticateWithBiometrics(
-//             localizedReason: "Scan your finger print to authenticate",
-//             useErrorDialogs: true,
-//             stickyAuth: false);
-//         if (authenticated) {
-//           Navigator.pushNamed(context, "/signup");
-//         }
-//       } on PlatformException catch (e) {
-//         print(e);
-//       }
-//       if (!mounted) return;
-
-//       setState(() {
-//         authorized =
-//             authenticated ? "Autherized success" : "Failed to authenticate";
-//       });
-//     }
-
-//     void checkAvailableResult() async {
-//       bool canCheckBiometrics = await auth.canCheckBiometrics;
-
-//       if (canCheckBiometrics) {
-//         var availableOptions = await auth.getAvailableBiometrics();
-//       } else {
-//         var message = "Unable to check biometric";
-//       }
-//       setState(() {});
-//     }
 
     return Form(
         key: _formKey,
         child: Column(
           children: [
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.only(left: 24, bottom: 2),
@@ -233,11 +154,25 @@ class _LoginFieldState extends State<LoginField> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing')),
+                      );
+
                       setState(() {
                         username = usernameController.text;
                         password = passwordController.text;
+
                         AuthServices().sigIn(username, password, context);
                       });
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   const SnackBar(
+                      //       duration: Duration(seconds: 5),
+                      //       backgroundColor: Colors.red,
+                      //       content: Text(
+                      //         'Invalid username and password',
+                      //         style: TextStyle(color: Colors.white),
+                      //       )),
+                      // );
                     }
                   },
                   child: Text('Sign in',
@@ -278,6 +213,7 @@ class ForgetPassButton extends StatelessWidget {
                 transitionDuration: Duration(milliseconds: 500),
                 pageBuilder: (context, animation, secondaryAnimation) =>
                     const ForgetPassword(),
+                // const Home(),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, Widget child) {
                   // animation = CurvedAnimation(

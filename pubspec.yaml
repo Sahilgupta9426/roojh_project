@@ -37,13 +37,9 @@ dependencies:
   hexcolor: ^2.0.6
   flutter_svg: ^1.0.3
   fluttertoast: ^8.0.9
-  shared_preferences: ^2.0.13
   local_auth: ^1.1.11
   is_lock_screen: ^2.0.0
-  get:
-  localstorage: ^4.0.0+1
   flutter_secure_storage: ^5.0.2
-  # flutter_screenutil: ^5.4.0+1
   amplify_flutter: 
   amplify_auth_cognito: 
   amplify_core:

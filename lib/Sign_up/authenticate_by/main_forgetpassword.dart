@@ -134,7 +134,7 @@ class _AuthenticationByState extends State<AuthenticationBy> {
                   ),
                   Container(
                       child: radioButtonItem == 'ONE'
-                          ? ByPhone()
+                          ? ByPhone(user: user, pass: pass)
                           : ByEmail(user: user, pass: pass))
                   // ByEmail(),
                 ],
