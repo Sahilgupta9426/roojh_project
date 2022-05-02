@@ -67,12 +67,17 @@ class _StartPointState extends State<StartPoint> {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Roojh',
-        home: Scaffold(body: _amplifyConfigured ? SignIn() : Text('Loading')),
+        home: Scaffold(
+            body: _amplifyConfigured
+                ? SignIn(
+                    notify: '0',
+                  )
+                : Text('Loading')),
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
             scaffoldBackgroundColor: Color.fromARGB(255, 255, 249, 249)),
         routes: {
-          "/login": (context) => SignIn(),
+          "/login": (context) => SignIn(notify: '0'),
           "/forgetPass": (context) => ForgetPassword(),
           "/signup": (context) => SignUp(),
           "/home": (context) => Home(),

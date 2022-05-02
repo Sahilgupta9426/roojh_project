@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
                 AlreadyHaveAccount(), //to redirect in sign in page saved in 'Sign_up/already_have_account.dart'
                 OrLoginWith(), //divider between signup form and login with buttons saved in 'Sign_up/or_login_with.dart'
                 SizedBox(height: 16),
-                Facebook_Login(), //login with facebook.saved in'common_code/login_with_buttons.dart'
+                FacebookLogin(), //login with facebook.saved in'common_code/login_with_buttons.dart'
                 SizedBox(height: 6),
                 GoogleLogin(), //login with google.saved in'common_code/login_with_buttons.dart'
                 SizedBox(

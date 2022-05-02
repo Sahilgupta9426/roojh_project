@@ -90,18 +90,19 @@ class _SignupFieldState extends State<SignupField> {
               ),
             ),
             Container(
+                padding: EdgeInsets.only(top: 5),
                 child: notify == 'User not confirmed in the system.' ||
                         notify == 'Failed since user is not authorized.'
-                    ? Text(
+                    ? const Text(
                         ' Username Already Exist',
                         style: TextStyle(color: Colors.red),
                       )
-                    : SizedBox()),
-            SizedBox(height: 14.49),
-            Align(
+                    : const SizedBox()),
+            const SizedBox(height: 10.49),
+            const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 24, bottom: 2),
+                padding: EdgeInsets.only(left: 24, bottom: 2),
                 child: Text(
                   'Password',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
@@ -114,7 +115,8 @@ class _SignupFieldState extends State<SignupField> {
                 obscureText: true,
                 enableSuggestions: false,
                 autocorrect: false,
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                style:
+                    const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: HexColor('#F3F6FF'),
@@ -134,7 +136,7 @@ class _SignupFieldState extends State<SignupField> {
                         color: HexColor('#CED3E1'),
                         width: 1.0,
                       )),
-                  errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+                  errorStyle: const TextStyle(color: Colors.red, fontSize: 15),
                   errorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(98.67),
                   ),
@@ -151,6 +153,7 @@ class _SignupFieldState extends State<SignupField> {
                   } else if (!regex.hasMatch(val)) {
                     return 'Example@123';
                   }
+                  return null;
                 },
                 onChanged: (val) {
                   setState(() {
@@ -218,6 +221,7 @@ class _SignupFieldState extends State<SignupField> {
                   } else if (!regex.hasMatch(val)) {
                     return 'Example@123';
                   }
+                  return null;
                 },
               ),
             ),
@@ -241,7 +245,7 @@ class _SignupFieldState extends State<SignupField> {
                         setState(() {
                           notify = 'Available';
                         });
-                        await Future.delayed(Duration(seconds: 1));
+                        await Future.delayed(const Duration(seconds: 1));
 
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -257,7 +261,7 @@ class _SignupFieldState extends State<SignupField> {
                       }
                     }
                   },
-                  child: Text('Continue',
+                  child: const Text('Continue',
                       style: TextStyle(fontSize: 20, color: Colors.white)),
                   style: ButtonStyle(
                       foregroundColor:

@@ -38,11 +38,11 @@ class GoogleLogin extends StatelessWidget {
                   // ),
 
                   ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Container(
-                child: Text(
+                child: const Text(
                   'Sign In With Google',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
@@ -55,8 +55,8 @@ class GoogleLogin extends StatelessWidget {
   }
 }
 
-class Facebook_Login extends StatelessWidget {
-  const Facebook_Login({
+class FacebookLogin extends StatelessWidget {
+  const FacebookLogin({
     Key? key,
   }) : super(key: key);
 

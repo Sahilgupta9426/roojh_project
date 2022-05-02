@@ -5,7 +5,7 @@ import '../../services/auth_services.dart';
 
 class ConfirmCode extends StatefulWidget {
   final username;
-  ConfirmCode({this.username});
+  const ConfirmCode({Key? key, this.username}) : super(key: key);
   // const ConfirmCode({Key? key}) : super(key: key);
 
   @override
@@ -23,11 +23,11 @@ class _ConfirmCodeState extends State<ConfirmCode> {
         body: SingleChildScrollView(
       child: Column(
         children: [
-          TopImagesField(),
-          SizedBox(
+          const TopImagesField(),
+          const SizedBox(
             height: 50,
           ),
-          Text(
+          const Text(
             'Verify Your Email Here',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
@@ -40,48 +40,54 @@ class _ConfirmCodeState extends State<ConfirmCode> {
               // decoration: BoxDecoration(color: Colors.white, boxShadow: [
               //   BoxShadow(color: Colors.grey.withOpacity(0.7))
               // ]),
-              child: Form(
-                key: _formKey,
-                child: Column(children: [
-                  TextFormField(
-                    maxLength: 6,
-                    decoration: InputDecoration(
-                      hintText: '',
-                      errorStyle: TextStyle(color: Colors.red, fontSize: 15),
-                    ),
-                    controller: codeController,
-                    onChanged: (val) {
-                      setState(() {
-                        code = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
+              child: Column(
+                children: [
+                  const SizedBox(
                     height: 30,
                   ),
                   Container(
                       child: right_code ==
                               'Confirmation code entered is not correct.'
-                          ? Text(
+                          ? const Text(
                               'Please Enter Valid OTP',
                               style: TextStyle(color: Colors.red),
                             )
-                          : Text('The otp has been sent to your Email Id')),
-                  SizedBox(height: 30),
-                  ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          setState(() async {
-                            right_code = await AuthServices()
-                                .cofirmUser(widget.username, code, context);
+                          : const Text(
+                              'The otp has been sent to your Email Id')),
+                  Form(
+                    key: _formKey,
+                    child: Column(children: [
+                      TextFormField(
+                        maxLength: 6,
+                        decoration: const InputDecoration(
+                          hintText: '',
+                          errorStyle:
+                              TextStyle(color: Colors.red, fontSize: 15),
+                        ),
+                        controller: codeController,
+                        onChanged: (val) {
+                          setState(() {
+                            code = val;
                           });
-                        }
-                      },
-                      child: Text('Confirm')),
-                  SizedBox(
-                    height: 10,
+                        },
+                      ),
+                      const SizedBox(height: 30),
+                      ElevatedButton(
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              setState(() async {
+                                right_code = await AuthServices()
+                                    .cofirmUser(widget.username, code, context);
+                              });
+                            }
+                          },
+                          child: const Text('Confirm')),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ]),
                   ),
-                ]),
+                ],
               ),
             ),
           ),

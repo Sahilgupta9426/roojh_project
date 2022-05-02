@@ -15,7 +15,7 @@ class AlreadyHaveAccount extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Already have an account?',
+          const Text('Already have an account?',
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
           TextButton(
             onPressed: () {
@@ -25,7 +25,7 @@ class AlreadyHaveAccount extends StatelessWidget {
                   PageRouteBuilder(
                     transitionDuration: Duration(milliseconds: 500),
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        const SignIn(),
+                        SignIn(notify: '0'),
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, Widget child) {
                       animation = CurvedAnimation(

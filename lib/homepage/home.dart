@@ -56,20 +56,12 @@ class _HomeState extends State<Home> {
                   height: 40,
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
-
-                      // onPressed: () async {
-                      //   final SharedPreferences sharedPreferences =
-                      //       await SharedPreferences.getInstance();
-
-                      //   sharedPreferences.remove('username');
-
-                      //   Navigator.pushNamed(context, "/login");
-                      // },
                       onPressed: () {
                         // AuthController.logOut();
                         AuthServices().signOut(context, userSignedIn);
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => SignIn()));
+                        Navigator.pushReplacementNamed(context, "/login");
+                        // Navigator.of(context).push(
+                        //     MaterialPageRoute(builder: (context) => SignIn()));
                       },
                       child: Text('logout')),
                 )

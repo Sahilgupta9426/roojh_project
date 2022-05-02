@@ -3,13 +3,15 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../../services/auth_services.dart';
 
+// ignore: must_be_immutable
 class ByEmail extends StatefulWidget {
   String user, pass;
   // const ByEmail({Key? key}) : super(key: key);
   ByEmail({
+    Key? key,
     required this.user,
     required this.pass,
-  });
+  }) : super(key: key);
 
   @override
   State<ByEmail> createState() => _ByEmailState();
@@ -29,10 +31,10 @@ class _ByEmailState extends State<ByEmail> {
         key: _formKey,
         child: Column(
           children: [
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 2),
+                padding: EdgeInsets.only(bottom: 2),
                 child: Text(
                   'Email id ',
                   style: TextStyle(
@@ -49,7 +51,8 @@ class _ByEmailState extends State<ByEmail> {
                 filled: true,
                 fillColor: HexColor('#F3F6FF'),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                contentPadding:
+                    const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                 hintText: "Enter Your Email Id",
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(98.67),
@@ -79,12 +82,12 @@ class _ByEmailState extends State<ByEmail> {
                 }
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 19,
             ),
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
-              child: Padding(
+              child: const Padding(
                 padding: const EdgeInsets.only(left: 9),
                 child: Text(
                   'We are sending authentication link on above Id',

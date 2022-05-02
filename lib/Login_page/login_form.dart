@@ -26,6 +26,7 @@ class _LoginFieldState extends State<LoginField> {
     var password = "";
     final usernameController = TextEditingController();
     final passwordController = TextEditingController();
+    var notify;
 
     return Form(
         key: _formKey,
@@ -155,24 +156,28 @@ class _LoginFieldState extends State<LoginField> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing')),
+                        const SnackBar(
+                            duration: Duration(seconds: 2),
+                            content: Text('Processing')),
                       );
 
-                      setState(() {
+                      setState(() async {
                         username = usernameController.text;
                         password = passwordController.text;
 
-                        AuthServices().sigIn(username, password, context);
+                        notify = await AuthServices()
+                            .sigIn(username, password, context);
+                        print('-------------------------------$notify');
+                        if (notify == 'Failed since user is not authorized.' ||
+                            notify == 'User not found in the system.') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  duration: Duration(seconds: 4),
+                                  backgroundColor: Colors.red,
+                                  content:
+                                      Text('invalid username and password')));
+                        }
                       });
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   const SnackBar(
-                      //       duration: Duration(seconds: 5),
-                      //       backgroundColor: Colors.red,
-                      //       content: Text(
-                      //         'Invalid username and password',
-                      //         style: TextStyle(color: Colors.white),
-                      //       )),
-                      // );
                     }
                   },
                   child: Text('Sign in',
