@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:roojh/Sign_up/authenticate_by/main_forgetpassword.dart';
+import 'package:roojh/Sign_up/authenticate_by/main_authentiacteBy.dart';
 import 'package:roojh/services/auth_services.dart';
 
 //sign up form
@@ -16,9 +16,9 @@ class SignupField extends StatefulWidget {
 }
 
 class _SignupFieldState extends State<SignupField> {
-  late String username, password, conformpass;
+  late String email, password, conformpass;
   final _formKey = GlobalKey<FormState>();
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirm_passwordController = TextEditingController();
   RegExp regex =
@@ -36,7 +36,7 @@ class _SignupFieldState extends State<SignupField> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 24, bottom: 2),
                 child: Text(
-                  'Username',
+                  'Email',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -53,7 +53,7 @@ class _SignupFieldState extends State<SignupField> {
                   fillColor: HexColor('#F3F6FF'),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                  hintText: "Enter Your Username",
+                  hintText: "Enter Your email",
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(98.67),
                     borderSide: BorderSide(
@@ -76,15 +76,17 @@ class _SignupFieldState extends State<SignupField> {
                     borderRadius: BorderRadius.circular(98.67),
                   ),
                 ),
-                controller: usernameController,
+                controller: emailController,
                 validator: (val) {
-                  if (val!.isEmpty || val.length < 6) {
-                    return 'Please Enter more than 6 letters';
+                  if (val!.isEmpty ||
+                      !val.contains('@') ||
+                      !val.contains('.')) {
+                    return 'Invalid email';
                   }
                 },
                 onChanged: (val) {
                   setState(() {
-                    username = val;
+                    email = val;
                   });
                 },
               ),
@@ -94,7 +96,7 @@ class _SignupFieldState extends State<SignupField> {
                 child: notify == 'User not confirmed in the system.' ||
                         notify == 'Failed since user is not authorized.'
                     ? const Text(
-                        ' Username Already Exist',
+                        'Email Already Exist',
                         style: TextStyle(color: Colors.red),
                       )
                     : const SizedBox()),
@@ -234,7 +236,7 @@ class _SignupFieldState extends State<SignupField> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      userexist = await AuthServices().userExist(username);
+                      userexist = await AuthServices().userExist(email);
                       print('---------=====-------$userexist');
                       setState(() {
                         notify = userexist;
@@ -246,18 +248,7 @@ class _SignupFieldState extends State<SignupField> {
                           notify = 'Available';
                         });
                         await Future.delayed(const Duration(seconds: 1));
-
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              // Builder for the nextpage
-                              // class's constructor.
-                              builder: (context) => AuthenticationBy(
-                                    // Date as arguments to
-                                    // send to next page.
-                                    user: usernameController.text,
-                                    pass: passwordController.text,
-                                  )),
-                        );
+                        AuthServices().signUp(email, password, context);
                       }
                     }
                   },

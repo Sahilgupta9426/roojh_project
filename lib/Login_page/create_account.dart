@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../Sign_up/authenticate_by/main_authentiacteBy.dart';
 import '../Sign_up/main_sign_up.dart';
 
 //text button which redirect in 'sign up page'
@@ -26,7 +27,7 @@ class Create_Acoount extends StatelessWidget {
                   PageRouteBuilder(
                     transitionDuration: Duration(milliseconds: 500),
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        const SignUp(),
+                        const AuthenticationBy(),
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, Widget child) {
                       animation = CurvedAnimation(

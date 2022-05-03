@@ -2,22 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:roojh/Sign_up/authenticate_by/by_email.dart';
 import 'package:roojh/Sign_up/authenticate_by/by_phone.dart';
-import 'package:roojh/Sign_up/signup_form.dart';
+
 import 'package:roojh/common_code/topImg.dart';
 
-// import 'package:roojh/Sign_up/by_email.dart';
-// import 'package:roojh/forget_password/by_phone.dart';
+import '../../common_code/login_with_buttons.dart';
+import '../already_have_account.dart';
+import '../or_login_with.dart';
 
 class AuthenticationBy extends StatefulWidget {
-  String user, pass;
-  // const AuthenticationBy({
-  //   Key? key,
-  // }) : super(key: key);
+  const AuthenticationBy({
+    Key? key,
+  }) : super(key: key);
 
-  AuthenticationBy({
-    required this.user,
-    required this.pass,
-  });
   @override
   State<AuthenticationBy> createState() => _AuthenticationByState();
 }
@@ -30,9 +26,6 @@ class _AuthenticationByState extends State<AuthenticationBy> {
   int id = 1;
   @override
   Widget build(BuildContext context) {
-    var user = widget.user;
-    var pass = widget.pass;
-
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -133,36 +126,21 @@ class _AuthenticationByState extends State<AuthenticationBy> {
                     height: 40,
                   ),
                   Container(
-                      child: radioButtonItem == 'ONE'
-                          ? ByPhone(user: user, pass: pass)
-                          : ByEmail(user: user, pass: pass))
+                      child: radioButtonItem == 'ONE' ? ByPhone() : ByEmail())
                   // ByEmail(),
                 ],
               ),
             ),
+
             SizedBox(
-              height: 13,
+              height: 32,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Having Trouble?',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-                ),
-                TextButton(
-                    onPressed: () {
-                      setState(() {});
-                    },
-                    child: Text(
-                      'Get Help',
-                      style: TextStyle(
-                          color: radio_color,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500),
-                    ))
-              ],
-            ),
+            AlreadyHaveAccount(), //to redirect in sign in page saved in 'Sign_up/already_have_account.dart'
+            OrLoginWith(), //divider between signup form and login with buttons saved in 'Sign_up/or_login_with.dart'
+            SizedBox(height: 16),
+            FacebookLogin(), //login with facebook.saved in'common_code/login_with_buttons.dart'
+            SizedBox(height: 6),
+            GoogleLogin(),
             SizedBox(
               height: 50,
             )

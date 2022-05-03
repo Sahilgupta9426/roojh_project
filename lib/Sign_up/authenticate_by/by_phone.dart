@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../../services/auth_services.dart';
+
 class ByPhone extends StatefulWidget {
-  var user;
+  const ByPhone({Key? key}) : super(key: key);
 
-  var pass;
-
-  // const ByPhone({Key? key}) : super(key: key);
-  ByPhone({
-    required this.user,
-    required this.pass,
-  });
   @override
   State<ByPhone> createState() => _ByPhoneState();
 }
@@ -18,7 +13,15 @@ class ByPhone extends StatefulWidget {
 class _ByPhoneState extends State<ByPhone> {
   final _formKey = GlobalKey<FormState>();
   var phone_no = "";
+  var notify;
+  final phoneController = TextEditingController();
+  late String phone, password, conformpass;
 
+  final passwordController = TextEditingController();
+  final confirm_passwordController = TextEditingController();
+  RegExp regex =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  var userexist;
   final phone_noController = TextEditingController();
 
   @override
@@ -79,37 +82,148 @@ class _ByPhoneState extends State<ByPhone> {
             SizedBox(
               height: 19,
             ),
+
+            // SizedBox(height: 14.49),
             Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 9),
-                child: Text(
-                  'We are sending authentication link on above number',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                  // textAlign: TextAlign.center,
-                ),
+              alignment: Alignment.topLeft,
+              child: const Text(
+                'Password',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
             ),
-            SizedBox(height: 80),
+            TextFormField(
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: HexColor('#F3F6FF'),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Enter Your Password",
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(98.67),
+                  borderSide: BorderSide(
+                    color: HexColor('#CED3E1'),
+                    width: 1.0,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(98.67),
+                    borderSide: BorderSide(
+                      color: HexColor('#CED3E1'),
+                      width: 1.0,
+                    )),
+                errorStyle: const TextStyle(color: Colors.red, fontSize: 15),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(98.67),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(98.67),
+                ),
+              ),
+              controller: passwordController,
+              validator: (val) {
+                if (val!.length < 8 || val.isEmpty) {
+                  return 'Password must be altleat 8 letters';
+                } else if (password != conformpass) {
+                  return 'Password did not match';
+                } else if (!regex.hasMatch(val)) {
+                  return 'Example@123';
+                }
+                return null;
+              },
+              onChanged: (val) {
+                setState(() {
+                  password = val;
+                });
+              },
+            ),
+            SizedBox(height: 14.49),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Confirm password',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              ),
+            ),
+            TextFormField(
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: HexColor('#F3F6FF'),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Please confirm your password",
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(98.67),
+                  borderSide: BorderSide(
+                    color: HexColor('#CED3E1'),
+                    width: 1.0,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(98.67),
+                    borderSide: BorderSide(
+                      color: HexColor('#CED3E1'),
+                      width: 1.0,
+                    )),
+                errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(98.67),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(98.67),
+                ),
+              ),
+              controller: confirm_passwordController,
+              onChanged: (val) {
+                setState(() {
+                  conformpass = val;
+                });
+              },
+              validator: (val) {
+                if (val!.isEmpty || val.length < 8) {
+                  return 'Password must be atleast 8 letters';
+                } else if (password != conformpass) {
+                  return 'Password did not match';
+                } else if (!regex.hasMatch(val)) {
+                  return 'Example@123';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 19,
+            ),
             Container(
               height: 51.8,
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    setState(() {
-                      phone_no = phone_noController.text;
+                    phone = phoneController.text;
 
-                      // final SharedPreferences sharedPreferences =
-                      //     await SharedPreferences.getInstance();
-                      // sharedPreferences.setString(
-                      //     'phone_no', phone_noController.text);
-                      // Navigator.pushNamed(context, "/auth");
+                    userexist = await AuthServices().userExist(phone);
+                    print('---------=====-------$userexist');
+                    setState(() {
+                      notify = userexist;
                     });
+
+                    if (notify == 'User not found in the system.' &&
+                        notify != 'User not confirmed in the system.') {
+                      setState(() {
+                        notify = 'Available';
+                      });
+                      await Future.delayed(const Duration(seconds: 1));
+                      AuthServices().signUpbyPhone(phone, password, context);
+                    }
+
                     _formKey.currentState!.save();
-                    // print(_loginUserData);
-                    // AuthController.login(_loginUserData);
-                    // Navigator.pushNamed(context, "/auth");
                   }
                 },
                 child: Text('Continue',

@@ -4,8 +4,8 @@ import 'package:roojh/common_code/topImg.dart';
 import '../../services/auth_services.dart';
 
 class ConfirmCode extends StatefulWidget {
-  final username;
-  const ConfirmCode({Key? key, this.username}) : super(key: key);
+  final email;
+  const ConfirmCode({Key? key, this.email}) : super(key: key);
   // const ConfirmCode({Key? key}) : super(key: key);
 
   @override
@@ -77,7 +77,7 @@ class _ConfirmCodeState extends State<ConfirmCode> {
                             if (_formKey.currentState!.validate()) {
                               setState(() async {
                                 right_code = await AuthServices()
-                                    .cofirmUser(widget.username, code, context);
+                                    .cofirmUser(widget.email, code, context);
                               });
                             }
                           },
