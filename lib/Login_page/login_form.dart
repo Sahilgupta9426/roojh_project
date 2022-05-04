@@ -37,7 +37,7 @@ class _LoginFieldState extends State<LoginField> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 24, bottom: 2),
                 child: Text(
-                  'Email Or Phone No',
+                  'Email',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -54,7 +54,7 @@ class _LoginFieldState extends State<LoginField> {
                   fillColor: HexColor('#F3F6FF'),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                  hintText: "Enter Your Email Or Phone No",
+                  hintText: "Enter Your Email",
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(98.67),
                     borderSide: BorderSide(

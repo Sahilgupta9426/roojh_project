@@ -43,6 +43,7 @@ dependencies:
   amplify_flutter: 
   amplify_auth_cognito: 
   amplify_core:
+  country_code_picker: ^2.0.2
 
 dev_dependencies:
   flutter_test:

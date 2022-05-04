@@ -66,47 +66,6 @@ class AuthServices {
   }
 //end sign up by email
 
-//sign up by phone
-  signUpbyPhone(phone, password, context) async {
-    try {
-      Map<CognitoUserAttributeKey, String> userAttributes = {
-        CognitoUserAttributeKey.email: '',
-        CognitoUserAttributeKey.phoneNumber: phone
-      };
-      Amplify.Auth.signUp(
-              username: phone,
-              password: password,
-              options: CognitoSignUpOptions(userAttributes: userAttributes))
-          .then((value) => {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ConfirmCode(email: phone)))
-              });
-    } on AuthException catch (e) {
-      print(e.message);
-      return e.message;
-    }
-  }
-
-  cofirmUserByPhone(username, confirmationCode, context) async {
-    try {
-      SignUpResult res = await Amplify.Auth.confirmSignUp(
-          username: username, confirmationCode: confirmationCode);
-      if (res.isSignUpComplete) {
-        // Navigator.of(context).pop();
-        // Navigator.of(context).pop();
-        var notify = '1';
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => SignIn(
-                  notify: notify,
-                )));
-      }
-    } on AuthException catch (e) {
-      print(e.message);
-      return e.message;
-    }
-  }
-
-//end sign up by phone
   //sign in
   sigIn(username, password, context) async {
     try {

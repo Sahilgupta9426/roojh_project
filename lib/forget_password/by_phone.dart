@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ByPhone extends StatefulWidget {
@@ -11,8 +12,10 @@ class ByPhone extends StatefulWidget {
 class _ByPhoneState extends State<ByPhone> {
   final _formKey = GlobalKey<FormState>();
   var phone_no = "";
-  List<String> _countryCodes = ['+91', '+23'];
+
   final phone_noController = TextEditingController();
+  late String _selectedCountryCode;
+  List<String> _countryCodes = ['+91', '+23'];
 
   @override
   Widget build(BuildContext context) {
@@ -33,41 +36,86 @@ class _ByPhoneState extends State<ByPhone> {
                 ),
               ),
             ),
-            TextFormField(
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: HexColor('#F3F6FF'),
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                hintText: "Enter Your Phone Number",
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(98.67),
-                  borderSide: BorderSide(
-                    color: HexColor('#CED3E1'),
-                    // width: 2.0,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(98.67),
-                    borderSide: BorderSide(
-                      color: HexColor('#CED3E1'),
-                      width: 1.0,
+            Row(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                        color: HexColor('#F3F6FF'),
+                        border: Border.all(
+                          color: HexColor('#CED3E1'),
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(98.67),
+                          bottomLeft: Radius.circular(98.67),
+                        )),
+                    child: CountryCodePicker(
+                      padding: EdgeInsets.zero,
+                      textStyle: TextStyle(fontSize: 17, color: Colors.black),
+                      initialSelection: 'IN',
+                      showCountryOnly: false,
+                      showOnlyCountryWhenClosed: false,
+                      favorite: ['+91', 'IN'],
+                      showFlagMain: false,
                     )),
-                errorStyle: TextStyle(color: Colors.red, fontSize: 15),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(98.67),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(98.67),
-                ),
-              ),
-              controller: phone_noController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'please enter your number';
-                }
-              },
+                Expanded(
+                  child: TextFormField(
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: HexColor('#F3F6FF'),
+                      border: InputBorder.none,
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: "Enter Your Phone Number",
+                      enabledBorder: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(98.67),
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(98.67),
+                          topLeft: Radius.circular(0),
+                          bottomRight: Radius.circular(98.67),
+                          bottomLeft: Radius.circular(0),
+                        ),
+                        borderSide: BorderSide(
+                          color: HexColor('#CED3E1'),
+                          // width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          // borderRadius: BorderRadius.circular(98.67),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(98.67),
+                            topLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(98.67),
+                            bottomLeft: Radius.circular(0),
+                          ),
+                          borderSide: BorderSide(
+                            color: HexColor('#CED3E1'),
+                            width: 1.0,
+                          )),
+                      errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(98.67),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(98.67),
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(98.67),
+                          topLeft: Radius.circular(0),
+                          bottomRight: Radius.circular(98.67),
+                          bottomLeft: Radius.circular(0),
+                        ),
+                      ),
+                    ),
+                    controller: phone_noController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'please enter your number';
+                      }
+                      return null;
+                    },
+                  ),
+                )
+              ],
             ),
             SizedBox(
               height: 19,

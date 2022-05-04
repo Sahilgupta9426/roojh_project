@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:roojh/Sign_up/authenticate_by/main_authentiacteBy.dart';
+
 import 'package:roojh/services/auth_services.dart';
 
 //sign up form
