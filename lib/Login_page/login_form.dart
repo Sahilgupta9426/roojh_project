@@ -211,28 +211,29 @@ class ForgetPassButton extends StatelessWidget {
     return TextButton(
         style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
         onPressed: () {
-          // Navigator.pushNamed(context, "/forgetPass");
-          Navigator.push(
-              context,
-              PageRouteBuilder(
-                transitionDuration: Duration(milliseconds: 500),
-                pageBuilder: (context, animation, secondaryAnimation) =>
-                    const ForgetPassword(),
-                // const Home(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, Widget child) {
-                  // animation = CurvedAnimation(
-                  //     parent: animation,
-                  //     curve: Curves.decelerate);
-                  animation = CurvedAnimation(
-                      parent: animation, curve: Curves.easeOutCubic);
-                  return ScaleTransition(
-                    scale: animation,
-                    alignment: Alignment.center,
-                    child: child,
-                  );
-                },
-              ));
+          Navigator.pushNamed(context, "/forgetPass");
+          // Navigator.push(
+          //     context,
+          //     PageRouteBuilder(
+          //       transitionDuration: Duration(milliseconds: 500),
+          //       pageBuilder: (context, animation, secondaryAnimation) =>
+          //           const ForgetPassword(),
+          //       // const Home(),
+          //       transitionsBuilder:
+          //           (context, animation, secondaryAnimation, Widget child) {
+          //         // animation = CurvedAnimation(
+          //         //     parent: animation,
+          //         //     curve: Curves.decelerate);
+          //         animation = CurvedAnimation(
+          //             parent: animation, curve: Curves.easeOutCubic);
+          //         return ScaleTransition(
+          //           scale: animation,
+          //           alignment: Alignment.center,
+          //           child: child,
+          //         );
+          //       },
+          //     )
+          //     );
         },
         child: Text(
           'Forget Password?',
