@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class ByPhone extends StatefulWidget {
   const ByPhone({Key? key}) : super(key: key);
@@ -15,10 +16,11 @@ class _ByPhoneState extends State<ByPhone> {
 
   final phone_noController = TextEditingController();
   late String _selectedCountryCode;
-  List<String> _countryCodes = ['+91', '+23'];
+  var notify;
 
   @override
   Widget build(BuildContext context) {
+    var notify;
     return Form(
         key: _formKey,
         child: Column(
@@ -36,87 +38,128 @@ class _ByPhoneState extends State<ByPhone> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                        color: HexColor('#F3F6FF'),
-                        border: Border.all(
-                          color: HexColor('#CED3E1'),
-                        ),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(98.67),
-                          bottomLeft: Radius.circular(98.67),
-                        )),
-                    child: CountryCodePicker(
+            Container(
+              // margin: EdgeInsets.only(bottom: 10, top: 10),
+              // height: 70,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                      height: 48.87,
                       padding: EdgeInsets.zero,
-                      textStyle: TextStyle(fontSize: 17, color: Colors.black),
-                      initialSelection: 'IN',
-                      showCountryOnly: false,
-                      showOnlyCountryWhenClosed: false,
-                      favorite: ['+91', 'IN'],
-                      showFlagMain: false,
-                    )),
-                Expanded(
-                  child: TextFormField(
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: HexColor('#F3F6FF'),
-                      border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      hintText: "Enter Your Phone Number",
-                      enabledBorder: OutlineInputBorder(
-                        // borderRadius: BorderRadius.circular(98.67),
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(98.67),
-                          topLeft: Radius.circular(0),
-                          bottomRight: Radius.circular(98.67),
-                          bottomLeft: Radius.circular(0),
-                        ),
-                        borderSide: BorderSide(
-                          color: HexColor('#CED3E1'),
-                          // width: 2.0,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          // borderRadius: BorderRadius.circular(98.67),
+                      decoration: BoxDecoration(
+                          color: HexColor('#F3F6FF'),
+                          // border: Border.all(
+                          //   color: HexColor('#CED3E1'),
+                          // ),
+                          border: Border(
+                              bottom: BorderSide(color: HexColor('#CED3E1')),
+                              left: BorderSide(
+                                color: HexColor('#CED3E1'),
+                              ),
+                              top: BorderSide(color: HexColor('#CED3E1')),
+                              right: BorderSide(
+                                color: HexColor('#CED3E1'),
+                              )),
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(98.67),
-                            topLeft: Radius.circular(0),
-                            bottomRight: Radius.circular(98.67),
-                            bottomLeft: Radius.circular(0),
-                          ),
-                          borderSide: BorderSide(
-                            color: HexColor('#CED3E1'),
-                            width: 1.0,
+                            topLeft: Radius.circular(98.67),
+                            bottomLeft: Radius.circular(98.67),
+                            topRight: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
                           )),
-                      errorStyle: TextStyle(color: Colors.red, fontSize: 15),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(98.67),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        // borderRadius: BorderRadius.circular(98.67),
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(98.67),
-                          topLeft: Radius.circular(0),
-                          bottomRight: Radius.circular(98.67),
-                          bottomLeft: Radius.circular(0),
-                        ),
+                      child: CountryCodePicker(
+                        padding: EdgeInsets.all(2),
+                        textStyle: TextStyle(fontSize: 17, color: Colors.black),
+                        initialSelection: 'IN',
+                        showCountryOnly: false,
+                        showOnlyCountryWhenClosed: false,
+                        favorite: ['+91', 'IN'],
+                        showFlagMain: false,
+                        onInit: (value) {
+                          _selectedCountryCode = value.toString();
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedCountryCode = value.toString();
+                          });
+                        },
+                      )),
+                  Expanded(
+                    child: Container(
+                      // height: 49.87,
+                      child: TextFormField(
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600),
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: HexColor('#F3F6FF'),
+                            border: InputBorder.none,
+                            contentPadding:
+                                EdgeInsets.fromLTRB(20.0, 14.5, 20.0, 14.5),
+                            hintText: "Enter Your Phone Number",
+                            enabledBorder: OutlineInputBorder(
+                              // borderRadius: BorderRadius.circular(98.67),
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(98.67),
+                                // topLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(98.67),
+                                // bottomLeft: Radius.circular(0),
+                              ),
+                              borderSide: BorderSide(
+                                color: HexColor('#CED3E1'),
+                                // width: 2.0,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                // borderRadius: BorderRadius.circular(98.67),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(98.67),
+                                  topLeft: Radius.circular(0),
+                                  bottomRight: Radius.circular(98.67),
+                                  bottomLeft: Radius.circular(0),
+                                ),
+                                borderSide: BorderSide(
+                                  color: HexColor('#CED3E1'),
+                                  width: 1.0,
+                                )),
+                            errorStyle:
+                                TextStyle(color: Colors.red, fontSize: 15),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: HexColor('#CED3E1'),
+                                width: 1.0,
+                              ),
+                              // borderRadius: BorderRadius.circular(98.67),
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(98.67),
+                                topLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(98.67),
+                                bottomLeft: Radius.circular(0),
+                              ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              // borderRadius: BorderRadius.circular(98.67),
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(98.67),
+                                topLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(98.67),
+                                bottomLeft: Radius.circular(0),
+                              ),
+                            )),
+                        controller: phone_noController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please enter your number';
+                          }
+                          return null;
+                        },
                       ),
                     ),
-                    controller: phone_noController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please enter your number';
-                      }
-                      return null;
-                    },
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
+            Center(child: notify != null ? Text('not valid') : SizedBox()),
             SizedBox(
               height: 19,
             ),
@@ -140,17 +183,12 @@ class _ByPhoneState extends State<ByPhone> {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
                       phone_no = phone_noController.text;
-
-                      // final SharedPreferences sharedPreferences =
-                      //     await SharedPreferences.getInstance();
-                      // sharedPreferences.setString(
-                      //     'phone_no', phone_noController.text);
-                      // Navigator.pushNamed(context, "/auth");
+                      if (phone_no.length < 10) {
+                        notify = 'Please enter a valid phone no';
+                      }
+                      print(_selectedCountryCode);
                     });
                     _formKey.currentState!.save();
-                    // print(_loginUserData);
-                    // AuthController.login(_loginUserData);
-                    // Navigator.pushNamed(context, "/auth");
                   }
                 },
                 child: Text('Continue',

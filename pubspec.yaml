@@ -44,6 +44,7 @@ dependencies:
   amplify_auth_cognito: 
   amplify_core:
   country_code_picker: ^2.0.2
+  intl_phone_number_input: ^0.7.0+2
 
 dev_dependencies:
   flutter_test:
