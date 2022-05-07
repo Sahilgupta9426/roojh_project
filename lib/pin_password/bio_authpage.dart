@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'package:local_auth/local_auth.dart';
@@ -8,7 +9,7 @@ import 'package:roojh/local_storage/local_storage.dart';
 
 import '../common_code/topImg.dart';
 
-class AuthPage extends StatefulWidget {
+class AuthPage extends StatefulHookWidget {
   const AuthPage({Key? key}) : super(key: key);
 
   @override

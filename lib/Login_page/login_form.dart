@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hooks_riverpod/all.dart';
+
 import 'package:roojh/forget_password/main_forgetpassword.dart';
 import 'package:roojh/homepage/home.dart';
 
+import '../providers.dart';
 import '../services/auth_services.dart';
 // import 'package:roojh/forget_password/main_forgetpassword.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 //login form
-class LoginField extends StatefulWidget {
+class LoginField extends StatefulHookWidget {
   const LoginField({
     Key? key,
   }) : super(key: key);
@@ -18,6 +22,7 @@ class LoginField extends StatefulWidget {
 }
 
 class _LoginFieldState extends State<LoginField> {
+  var userSignedIn;
   @override
   Widget build(BuildContext context) {
     Color color = HexColor('#F46524');
@@ -27,6 +32,7 @@ class _LoginFieldState extends State<LoginField> {
     final usernameController = TextEditingController();
     final passwordController = TextEditingController();
     var notify;
+    userSignedIn = useProvider(UserLoggedInProvider);
 
     return Form(
         key: _formKey,

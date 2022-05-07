@@ -30,7 +30,7 @@ class AuthServices {
     try {
       Map<CognitoUserAttributeKey, String> userAttributes = {
         CognitoUserAttributeKey.email: email,
-        CognitoUserAttributeKey.phoneNumber: ''
+        // CognitoUserAttributeKey.phoneNumber: ''
       };
       Amplify.Auth.signUp(
               username: email,
@@ -72,8 +72,8 @@ class AuthServices {
       SignInResult res =
           await Amplify.Auth.signIn(username: username, password: password);
       if (res.isSignedIn) {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const AuthPage()));
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => AuthPage()));
       }
 
       print('results------------- $res');
@@ -99,6 +99,15 @@ class AuthServices {
           await Amplify.Auth.signIn(username: username, password: '0000');
     } on AuthException catch (e) {
       return e.message;
+    }
+  }
+
+  Future loginWithSocial() async {
+    try {
+      var res =
+          await Amplify.Auth.signInWithWebUI(provider: AuthProvider.google);
+    } on AmplifyException catch (e) {
+      print(e.message);
     }
   }
 }

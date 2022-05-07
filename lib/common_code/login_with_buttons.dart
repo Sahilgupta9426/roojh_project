@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:roojh/services/auth_services.dart';
 
 class GoogleLogin extends StatelessWidget {
   const GoogleLogin({
@@ -23,7 +24,9 @@ class GoogleLogin extends StatelessWidget {
 
                 // side: BorderSide(color: Colors.red)
               ))),
-          onPressed: () {},
+          onPressed: () {
+            AuthServices().loginWithSocial();
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -1,6 +1,6 @@
 {
   "auth": {
-    "roojhabbcabec": {
+    "roojh7ab87d78": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
