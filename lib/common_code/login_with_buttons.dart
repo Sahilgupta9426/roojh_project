@@ -25,7 +25,7 @@ class GoogleLogin extends StatelessWidget {
                 // side: BorderSide(color: Colors.red)
               ))),
           onPressed: () {
-            AuthServices().loginWithSocial();
+            // AuthServices().loginWithSocial();
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

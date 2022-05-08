@@ -3,6 +3,7 @@ import 'package:roojh/common_code/topImg.dart';
 
 import '../../services/auth_services.dart';
 
+// confirmation page after giving email
 class ConfirmCode extends StatefulWidget {
   final email;
   const ConfirmCode({Key? key, this.email}) : super(key: key);

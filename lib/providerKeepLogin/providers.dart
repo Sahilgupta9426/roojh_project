@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+//it will get the status of user from 'main.dart'
+//if user loggedin is true the it will return isUsersigned is true and take you biometric authentication page from main.dart
 final UserLoggedInProvider =
     ChangeNotifierProvider<UserLoggedIn>((ref) => UserLoggedIn());
 

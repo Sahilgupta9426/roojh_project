@@ -1,8 +1,6 @@
 // import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import 'package:roojh/services/auth_services.dart';
 
 //sign up form
@@ -236,7 +234,8 @@ class _SignupFieldState extends State<SignupField> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      userexist = await AuthServices().userExist(email);
+                      userexist = await AuthServices().userExist(
+                          email); //it will check user is exist or not
                       print('---------=====-------$userexist');
                       setState(() {
                         notify = userexist;
@@ -244,11 +243,14 @@ class _SignupFieldState extends State<SignupField> {
 
                       if (notify == 'User not found in the system.' &&
                           notify != 'User not confirmed in the system.') {
+                        //if user not exist then it will go for sign up
                         setState(() {
                           notify = 'Available';
                         });
                         await Future.delayed(const Duration(seconds: 1));
-                        AuthServices().signUp(email, password, context);
+                        AuthServices().signUp(email, password,
+                            context); //this function will create a account for user and take to confirmation page using otp
+
                       }
                     }
                   },

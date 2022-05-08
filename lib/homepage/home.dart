@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:roojh/Login_page/main_login.dart';
 import 'package:roojh/common_code/topImg.dart';
-import 'package:roojh/providers.dart';
-
+import 'package:roojh/providerKeepLogin/providers.dart';
 import '../services/auth_services.dart';
-
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulHookWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,28 +15,12 @@ class Home extends StatefulHookWidget {
 class _HomeState extends State<Home> {
   var userSignedIn;
   var finalusername = "";
-  // @override
-  // void initState() {
-  //   getValidationData().whenComplete(() async {
-  //     // Timer(Duration(seconds: 2),
-  //     //     () => Get.to(finalusername == null ? LoginField() : Home()));
-  //   });
-  //   super.initState();
-  // }
-
-  // Future getValidationData() async {
-  //   final SharedPreferences sharedPreferences =
-  //       await SharedPreferences.getInstance();
-  //   var obtainedUsername = sharedPreferences.getString('username');
-  //   setState(() {
-  //     finalusername = obtainedUsername!;
-  //   });
-  // }
-  //2nd part
   DateTime? lastpresed;
   @override
   Widget build(BuildContext context) {
-    userSignedIn = useProvider(UserLoggedInProvider);
+    userSignedIn = useProvider(
+        UserLoggedInProvider); //it will get userlogged in from 'providerKeepLogin/providers.dart'
+    //and send to sign out function in 'services/auth_services.dart
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {
@@ -85,10 +65,11 @@ class _HomeState extends State<Home> {
                           // AuthController.logOut();
                           AuthServices().signOut(context, userSignedIn);
                           Navigator.pushReplacementNamed(context, "/login");
+
                           // Navigator.of(context).push(
                           //     MaterialPageRoute(builder: (context) => SignIn()));
                         },
-                        child: Text('logout')),
+                        child: Text('Logout')),
                   )
                 ],
               ),

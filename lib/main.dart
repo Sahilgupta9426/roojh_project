@@ -5,18 +5,14 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'package:roojh/Sign_up/main_sign_up.dart';
-
 import 'package:roojh/homepage/home.dart';
 import 'package:roojh/pin_password/bio_authpage.dart';
 import 'package:roojh/pin_password/createpin.dart';
-import 'package:roojh/providers.dart';
-
+import 'package:roojh/providerKeepLogin/providers.dart';
 import 'Login_page/main_login.dart';
 import 'amplifyconfiguration.dart';
 import 'forget_password/main_forgetpassword.dart';
-// import 'homepage/bio_authpage.dart';
 
 Future<void> main() async {
   runApp(ProviderScope(child: StartPoint()));
@@ -31,15 +27,14 @@ class StartPoint extends StatefulHookWidget {
 
 class _StartPointState extends State<StartPoint> {
   var userLoggedIn;
-
+//it will inform either confugration of amplify is successful or not ,and other problem in amplify
   bool _amplifyConfigured = false;
-  // late AmplifyAuthCognito auth;
 
   bool checkAuthStatus = false;
   AmplifyAuthCognito auth = AmplifyAuthCognito();
-  // var userLoggedIn;
 
   Future<void> _configuredAmplify() async {
+    //call this function in void initState()
     if (!mounted) return;
     // AmplifyAuthCognito auth = AmplifyAuthCognito();
 
@@ -66,6 +61,7 @@ class _StartPointState extends State<StartPoint> {
     _configuredAmplify();
   }
 
+//End ---- it will inform either confugration of amplify is successful or not ,and other problem in amplify
   @override
   Widget build(BuildContext context) {
     userLoggedIn = useProvider(UserLoggedInProvider);
@@ -73,16 +69,22 @@ class _StartPointState extends State<StartPoint> {
     return MaterialApp(
         title: 'Roojh',
         home: Scaffold(
-            body: _amplifyConfigured
-                ? checkAuthStatus
-                    ? userLoggedIn.getUserCurrentState()
-                        ? AuthPage()
-                        : SignIn(
-                            notify: '0',
-                          )
-                    : Center(child: Text('Loading'))
-                : Center(child: Text('Loading'))
-            // body: checkAuthStatus ? Home() : SignIn(notify: '0')
+            body:
+                _amplifyConfigured //if Amplify cognito don't support any OS then it
+                    ? checkAuthStatus //check user user auth status
+                        ? userLoggedIn
+                                .getUserCurrentState() //check user is login or not
+                            ? AuthPage() //if user logen in it will take to the biometric authentication page
+                            : SignIn(
+                                //if user no signed in then it will take to the sign in page
+                                notify: '0',
+                              )
+                        : Center(
+                            child: Text(
+                                'Loading')) //sow loading untill AmplifyCognito status don't confirmed
+                    : Center(
+                        child: Text(
+                            'Device Does Not Application')) //if device does not support
             ),
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
@@ -96,6 +98,8 @@ class _StartPointState extends State<StartPoint> {
           "/createpin": (context) => CreatePin(),
         });
   }
+
+//it will get status of user whether is sign in or sign out and take the status in providerKeepLogin/provider.dart
 
   getUserStatus() {
     handleAuth().then((val) {
@@ -119,4 +123,5 @@ class _StartPointState extends State<StartPoint> {
     var authStatus = await auth.fetchAuthSession();
     return authStatus;
   }
+  // End ---- it will get status of user is sign in or sign out
 }

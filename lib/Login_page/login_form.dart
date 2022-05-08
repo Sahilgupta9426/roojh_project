@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hexcolor/hexcolor.dart';
+// ignore: deprecated_member_use
 import 'package:hooks_riverpod/all.dart';
-
-import 'package:roojh/forget_password/main_forgetpassword.dart';
-import 'package:roojh/homepage/home.dart';
-
-import '../providers.dart';
+import '../providerKeepLogin/providers.dart';
 import '../services/auth_services.dart';
-// import 'package:roojh/forget_password/main_forgetpassword.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 //login form
 class LoginField extends StatefulHookWidget {

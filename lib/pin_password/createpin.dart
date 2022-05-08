@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:roojh/common_code/topImg.dart';
 import 'package:roojh/local_storage/local_storage.dart';
 
+//create pin form using LocalSecure Storage
 class CreatePin extends StatefulWidget {
   const CreatePin({Key? key}) : super(key: key);
 
@@ -84,7 +84,8 @@ class _CreatePinState extends State<CreatePin> {
                                   action: SnackBarAction(
                                     label: 'Go back to enter pin',
                                     onPressed: () {
-                                      Navigator.pushNamed(context, "/auth");
+                                      Navigator.pushReplacementNamed(
+                                          context, "/auth");
                                       // Some code to undo the change.
                                     },
                                   ));

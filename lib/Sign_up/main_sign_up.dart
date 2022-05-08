@@ -1,11 +1,10 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
-import 'package:roojh/Sign_up/or_login_with.dart';
 import 'package:roojh/Sign_up/signup_form.dart';
 import 'package:roojh/common_code/topImg.dart';
-
 import '../common_code/login_with_buttons.dart';
+import '../common_code/or_login_with.dart';
 import 'already_have_account.dart';
 
 class SignUp extends StatefulWidget {
@@ -26,9 +25,11 @@ class _SignUpState extends State<SignUp> {
           padding: const EdgeInsets.all(0),
           color: Colors.white,
           child: Column(
-            children: const [
-              TopImagesField(), //top images which in saved in 'common_code/topImg.dart'
-              Padding(
+            children: [
+              FadeInDown(
+                  child:
+                      TopImagesField()), //top images which in saved in 'common_code/topImg.dart'
+              const Padding(
                 padding:
                     EdgeInsets.only(left: 26, right: 192, top: 20, bottom: 20),
                 child: Align(
