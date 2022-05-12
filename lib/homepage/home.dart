@@ -63,8 +63,10 @@ class _HomeState extends State<Home> {
                     child: ElevatedButton(
                         onPressed: () {
                           // AuthController.logOut();
-                          AuthServices().signOut(context, userSignedIn);
-                          Navigator.pushReplacementNamed(context, "/login");
+                          AuthServices()
+                              .signOut(context, userSignedIn); //for logout
+                          Navigator.pushReplacementNamed(context,
+                              "/login"); //after logout it render to login page
 
                           // Navigator.of(context).push(
                           //     MaterialPageRoute(builder: (context) => SignIn()));

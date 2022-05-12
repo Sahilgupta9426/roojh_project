@@ -32,19 +32,21 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  hexcolor: ^2.0.6
-  flutter_svg: ^1.0.3
-  fluttertoast: ^8.0.9
-  local_auth: ^1.1.11
+  
+  hexcolor: ^2.0.6 #hexcolor to suporrt hexa color 
+  flutter_svg: ^1.0.3 #for use of svg file
+  local_auth: ^1.1.11 #for biometric authentication
   flutter_secure_storage: ^5.0.2
   amplify_flutter: 
   amplify_auth_cognito: 
   amplify_core:
   # country_code_picker: ^2.0.2
-  intl_phone_number_input: ^0.7.0+2
-  animate_do: ^2.1.0
+  intl_phone_number_input: ^0.7.0+2 #for std code phone number
+  animate_do: ^2.1.0 #for transition between one to second page
+  #for keep login
   flutter_hooks: ^0.16.0
   hooks_riverpod: ^0.13.0
+  #End--for keep login
 dev_dependencies:
   flutter_test:
     sdk: flutter
